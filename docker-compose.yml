@@ -1,0 +1,42 @@
+# docker-compose.yml
+# Runs the complete Alert Engine stack locally.
+# Usage: docker compose up --build
+# The API waits for MySQL to be healthy before starting.
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: alert-engine-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-localdev}
+      MYSQL_DATABASE: ${DB_NAME:-alert_engine}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alert-engine-api
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-alert_engine}
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD:-localdev}
+      SPRING_PROFILES_ACTIVE: docker
+
+volumes:
+  db-data:

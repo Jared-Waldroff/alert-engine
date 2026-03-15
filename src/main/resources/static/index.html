@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pason Alert Engine — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h1 class="logo">PASON</h1>
+      <span class="header-title">Threshold Alert Engine</span>
+    </div>
+    <div class="header-right">
+      <span id="engine-status" class="status-badge status-offline">OFFLINE</span>
+      <span id="uptime" class="metric">Uptime: 0s</span>
+      <span id="readings-count" class="metric">Readings: 0</span>
+      <span id="alerts-count" class="metric">Alerts: 0</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Controls Bar -->
+    <section class="controls">
+      <button id="btn-start" class="btn btn-primary" onclick="startSimulator()">
+        Start Simulator
+      </button>
+      <button id="btn-stop" class="btn btn-secondary" onclick="stopSimulator()" disabled>
+        Stop Simulator
+      </button>
+      <button class="btn btn-outline" onclick="refreshAll()">
+        Refresh Data
+      </button>
+    </section>
+
+    <!-- Grid Layout: Alerts | Sensor Feed | Rules -->
+    <div class="grid">
+      <!-- Active Alerts Panel -->
+      <section class="panel panel-alerts">
+        <h2 class="panel-title">
+          Active Alerts
+          <span id="alert-badge" class="count-badge">0</span>
+        </h2>
+        <div id="alerts-feed" class="feed">
+          <p class="empty-state">No alerts triggered yet. Start the simulator to begin.</p>
+        </div>
+      </section>
+
+      <!-- Sensor Live Feed Panel -->
+      <section class="panel panel-sensors">
+        <h2 class="panel-title">Sensor Live Feed</h2>
+        <div id="sensor-feed" class="feed">
+          <p class="empty-state">Waiting for sensor data...</p>
+        </div>
+      </section>
+
+      <!-- Alert Rules Panel -->
+      <section class="panel panel-rules">
+        <h2 class="panel-title">Alert Rules</h2>
+        <div id="rules-list" class="rules-container">
+          <p class="empty-state">Loading rules...</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
