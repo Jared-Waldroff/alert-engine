@@ -42,10 +42,10 @@ jobs:
       - name: Run tests with coverage
         run: ./gradlew test jacocoTestReport
         env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/alert_engine_test
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: test
-          SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+          TEST_DATASOURCE_URL: jdbc:mysql://localhost:3306/alert_engine_test
+          TEST_DATASOURCE_DRIVER: com.mysql.cj.jdbc.Driver
+          DB_USERNAME: root
+          DB_PASSWORD: test
 
       - name: Build Docker image
         run: docker build -t alert-engine .
