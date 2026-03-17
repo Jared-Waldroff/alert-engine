@@ -17,6 +17,12 @@
     <property name="checks" value="MethodName"/>
   </module>
 
+  <!-- LineLength is a Checker-level module in Checkstyle 10+ -->
+  <module name="LineLength">
+    <property name="max" value="100"/>
+    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+  </module>
+
   <module name="TreeWalker">
     <!-- Naming conventions -->
     <module name="TypeName"/>
@@ -32,7 +38,10 @@
     <module name="LocalVariableName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
-    <module name="ConstantName"/>
+    <!-- Allow SLF4J convention: private static final Logger log = ... -->
+    <module name="ConstantName">
+      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$|^log$|^alertLog$"/>
+    </module>
     <module name="PackageName">
       <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
     </module>
@@ -45,12 +54,6 @@
     <module name="UnusedImports"/>
     <module name="RedundantImport"/>
     <module name="AvoidStarImport"/>
-
-    <!-- Size violations -->
-    <module name="LineLength">
-      <property name="max" value="100"/>
-      <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
-    </module>
 
     <!-- Whitespace -->
     <module name="WhitespaceAround">

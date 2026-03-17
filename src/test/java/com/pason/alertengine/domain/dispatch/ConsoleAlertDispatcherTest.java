@@ -22,6 +22,7 @@ class ConsoleAlertDispatcherTest {
         .sensorType(SensorType.PRESSURE)
         .triggerValue(3500)
         .threshold(3000)
+        .conditionDescription("Value > 3000.0")
         .message("Test alert")
         .build();
 

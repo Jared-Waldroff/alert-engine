@@ -17,8 +17,10 @@ class ReadingWindowTest {
     var now = Instant.now();
 
     // Act
-    window.addReading(new SensorReading("s1", SensorType.PRESSURE, 100, "PSI", now.minusSeconds(2)));
-    window.addReading(new SensorReading("s1", SensorType.PRESSURE, 200, "PSI", now.minusSeconds(1)));
+    window.addReading(new SensorReading(
+        "s1", SensorType.PRESSURE, 100, "PSI", now.minusSeconds(2)));
+    window.addReading(new SensorReading(
+        "s1", SensorType.PRESSURE, 200, "PSI", now.minusSeconds(1)));
 
     // Assert
     var readings = window.getRecentReadings("s1");
@@ -43,7 +45,8 @@ class ReadingWindowTest {
     var now = Instant.now();
 
     // Act
-    window.addReading(new SensorReading("s1", SensorType.PRESSURE, 100, "PSI", now.minusSeconds(20)));
+    window.addReading(new SensorReading(
+        "s1", SensorType.PRESSURE, 100, "PSI", now.minusSeconds(20)));
     window.addReading(new SensorReading("s1", SensorType.PRESSURE, 200, "PSI", now));
 
     // Assert
